@@ -1,0 +1,1 @@
+- navbar da logo.src olarak göstermenin başka yolu yok mu
