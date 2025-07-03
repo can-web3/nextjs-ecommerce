@@ -22,6 +22,9 @@ export function ProductFilters({
   minPrice,
   maxPrice,
 }: Props) {
+  const formatLabel = (cat: string) =>
+    cat.charAt(0).toUpperCase() + cat.slice(1);
+
   return (
     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
       {/* category */}
@@ -38,13 +41,13 @@ export function ProductFilters({
                 onCategoryChange(categories[(i - 1 + categories.length) % categories.length]);
             }}
             onClick={() => onCategoryChange(cat)}
-            className={`px-4 py-2 rounded-full text-sm focus-ring-primary transition-colors duration-150 ${
+            className={`px-4 py-2 rounded-full text-sm focus-ring-primary transition-colors duration-150 cursor-pointer ${
               selectedCategory === cat
                 ? "bg-orange-600 text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
-            {cat}
+            {formatLabel(cat)}
           </button>
         ))}
       </div>
@@ -64,7 +67,7 @@ export function ProductFilters({
                 priceRange[1],
               ])
             }
-            className="input-base bg-gray-50 text-right w-20"
+            className="input-base bg-gray-50 text-right w-32 cursor-pointer"
             placeholder={`${minPrice}`}
           />
         </div>
@@ -82,7 +85,7 @@ export function ProductFilters({
                 Math.max(Number(e.target.value), priceRange[0]),
               ])
             }
-            className="input-base bg-gray-50 text-right w-16"
+            className="input-base bg-gray-50 text-right w-32 cursor-pointer"
             placeholder={`${maxPrice}`}
           />
         </div>

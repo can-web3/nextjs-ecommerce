@@ -3,7 +3,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useProducts } from "@/contexts/ProductContext";
 import { ProductFavoriteToggle } from "@/components/ProductFavoriteToggle";
 import { ProductFilters } from "@/components/ProductFilters";
@@ -12,6 +12,7 @@ const PAGE_SIZE = 20;
 const LOAD_DELAY = 1000;
 
 export function Products() {
+  const router = useRouter();
   const { products, loading } = useProducts();
 
   const prices = products.map((p) => p.price);
@@ -91,10 +92,19 @@ export function Products() {
 
       <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 gap-4">
         {filtered.slice(0, visibleCount).map((p) => (
-          <Link
+          <div
             key={p.id}
-            href={`/product/${p.id}`}
-            className="relative flex flex-col gap-2 border border-gray-300 p-2 group focus-ring"
+            role="link"
+            tabIndex={0}
+            aria-label={`Ürün detayına git: ${p.title}`}
+            onClick={() => router.push(`/product/${p.id}`)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                router.push(`/product/${p.id}`);
+              }
+            }}
+            className="relative flex flex-col gap-2 border border-gray-300 p-2 rounded-lg group focus-ring-primary cursor-pointer"
           >
             <div className="relative w-full aspect-square overflow-hidden rounded-lg">
               <Image
@@ -108,7 +118,7 @@ export function Products() {
             <h2 className="text-lg font-medium">{p.title}</h2>
             <p className="text-gray-600 line-clamp-2">{p.description}</p>
             <p className="font-semibold">{p.price} ₺</p>
-          </Link>
+          </div>
         ))}
       </div>
 
@@ -117,7 +127,7 @@ export function Products() {
           ref={loader}
           role="status"
           aria-live="polite"
-          className="mt-8 h-16 flex flex-col items-center justify-center"
+          className="mt-8 h-16 flex items-center justify-center"
         >
           {loadingMore ? (
             <div className="animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent" />

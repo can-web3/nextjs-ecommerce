@@ -12,6 +12,7 @@ import { LoginModalProvider } from "@/contexts/LoginModalContext";
 import { ProductProvider } from "@/contexts/ProductContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { CartProvider } from "@/contexts/CartContext";
+import { UsersProvider } from "@/contexts/UsersContext";
 
 const interFont = Inter({ subsets: ["latin"] });
 
@@ -27,30 +28,34 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body className={`${interFont.className} antialiased max-w-screen overflow-x-hidden`}>
+      <body
+        className={`${interFont.className} antialiased max-w-screen overflow-x-hidden`}
+      >
         <AuthProvider>
-          <LoginModalProvider>
-            <ProductProvider>
-              <FavoritesProvider>
-                <CartProvider>
-                  <Navbar />
-                  {children}
-                  <LoginModal />
-                  <ToastContainer
-                    position="top-right"
-                    autoClose={2000}
-                    hideProgressBar
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                  />
-                </CartProvider>
-              </FavoritesProvider>
-            </ProductProvider>
-          </LoginModalProvider>
+          <UsersProvider>
+            <LoginModalProvider>
+              <ProductProvider>
+                <FavoritesProvider>
+                  <CartProvider>
+                    <Navbar />
+                    {children}
+                    <LoginModal />
+                    <ToastContainer
+                      position="top-right"
+                      autoClose={2000}
+                      hideProgressBar
+                      newestOnTop={false}
+                      closeOnClick
+                      rtl={false}
+                      pauseOnFocusLoss
+                      draggable
+                      pauseOnHover
+                    />
+                  </CartProvider>
+                </FavoritesProvider>
+              </ProductProvider>
+            </LoginModalProvider>
+          </UsersProvider>
         </AuthProvider>
       </body>
     </html>
