@@ -1,4 +1,3 @@
-// src/components/Navbar.tsx
 "use client";
 
 import { useState } from "react";
@@ -24,6 +23,9 @@ export default function Navbar() {
 
   return (
     <header className="bg-white shadow-md">
+      <div className="bg-amber-200 p-2 text-center">
+        <p>Github'ta incelemek için lütfen <a href="https://github.com/can-web3/nextjs-ecommerce" target="_blank" className="font-bold underline text-blue-500">tıklayınız.</a></p>
+      </div>
       <div className="container mx-auto flex items-center justify-between px-4 py-3">
         {/* Logo */}
         <Link href="/">

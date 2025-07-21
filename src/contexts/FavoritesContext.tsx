@@ -17,7 +17,6 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [favorites, setFavorites] = useState<number[]>([]);
 
-  // Kullanıcı değişince localStorage'dan yükle
   useEffect(() => {
     if (user) {
       const stored = localStorage.getItem(`favorites_${user.id}`);
@@ -27,7 +26,6 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
-  // favorites değişince localStorage'a yaz
   useEffect(() => {
     if (user) {
       localStorage.setItem(`favorites_${user.id}`, JSON.stringify(favorites));
