@@ -127,6 +127,9 @@ export default function LoginModal() {
         {step === 1 ? (
           <>
             <h2 className="text-2xl font-semibold mb-4">E-posta ile Giriş</h2>
+            <div className="bg-amber-200 p-2 mb-2">
+              <span className="text-sm"><span className="font-bold">E-posta:</span> emily.johnson@x.dummyjson.com</span>
+            </div>
             <form
               onSubmit={handleEmailSubmit(onEmailSubmit)}
               className="space-y-4"
